@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/bookstore.css}">
+</head>
+<body>
+<th:block th:include="header-footer/headerLoginAdmin"></th:block>
+
+<div th:action = "@{/admin/book/save}" method = "post" th:object="${bookDTO}">
+
+<div style="padding: 20px; width: 100%; background-color: white; height: 130px">
+    <a style="margin: 10px 0px; color: #777777">DANH SÁCH SẢN PHẨM</a><br>
+    <a style="float:left;">Home / </a><a style="float:left;">Danh sách sản phẩm / </a><input style="background: white; float: left; color:#43A316; border: hidden" disabled th:field ="*{bookName}" type="text"></a>
+</div>
+
+<div class="home_content" style="background-color: white; width: 90%; height: auto; margin-top: 20px; margin-left: 70px">
+    <div style="width: 40%; float: left; padding: 65px 0 40px 50px;">
+        <img th:src="@{/image/imageBook/__${bookDTO.bookImage}__}" width="400px" height="400px">
+    </div>
+    <div style="width:60%; float: left; padding: 65px 0 40px;">
+        <table style="margin-right: 40px">
+            <tr>
+                <th style="width: 200px; height: 50px">Mã sách</th>
+                <td><input style="background: white; border: hidden" disabled th:field ="*{bookCode}" type="text" class="form-control"></td>
+            </tr>
+            <tr>
+                <th style="width: 200px; height: 50px">Tên sách</th>
+                <td><input style="background: white; border: hidden" disabled th:field ="*{bookName}" type="text" class="form-control"></td>
+            </tr>
+            <tr>
+                <th style="width: 200px; height: 50px">Tên tác giả</th>
+                <td><input style="background: white; border: hidden" disabled th:field ="*{bookAuthorId.authorName}" type="text" class="form-control"></td>
+            </tr>
+            <tr>
+                <th style="width: 200px; height: 50px">Danh mục</th>
+                <td><input style="background: white; border: hidden" disabled th:field ="*{categoryId.categoryName}" type="text" class="form-control"></td>
+            </tr>
+            <tr>
+                <th style="width: 200px; height: 50px">Giá tiền</th>
+                <td><input style="background: white; border: hidden; width:140px; float: left; padding-right: 0px;" disabled th:field ="*{bookPrice}" type="text" class="form-control"><span style="font-size: 12px; text-decoration:underline">đ</span></td>
+            </tr>
+            <tr>
+                <th style="width: 200px; height: 50px">Khuyến mãi</th>
+                <td><input style="background: white; border: hidden; width:55px; float: left; padding-right: 0px;" disabled th:field ="*{bookPromotionId.promotionPercent}" type="text" class="form-control"><span style="font-size: 12px">%</span></td>
+            </tr>
+            <tr>
+                <th style="width: 200px; height: 50px">Ngày xuất bản</th>
+                <td><input style="background: white; border: hidden" disabled th:field ="*{bookPublishDate}" type="text" class="form-control"></td>
+            </tr>
+            <tr>
+                <th style="width: 200px; height: 50px">Kích thước</th>
+                <td><input style="background: white; border: hidden" disabled th:field ="*{bookSize}" type="text" class="form-control"></td>
+            </tr>
+        </table>
+    </div>
+    <div style="float: left; margin-left: 110px; width: 84%; height: auto; margin-bottom: 20px">
+        <p><b>Mô tả sản phẩm</b></p>
+        <textarea style="background: white; border: hidden; height: auto; width: 84%" disabled th:field ="*{bookContent}" type="text" class="form-control"/>
+    </div>
+    <button type="submit" class="btn btn-success" style="background: white; color: #012b62; width: 170px; float: right; margin-right: 40px; margin-top: 20px; margin-bottom: 20px"><a style="text-decoration: none; color: black" th:href="@{/admin/book}">Trở về</a></button>
+
+    <div style="clear:both"></div>
+</div>
+</div>
+
+<th:block th:include="header-footer/footer"></th:block>
+
+</body>
+<script>
+    const $ = document.querySelector.bind(document);
+    const $$ = document.querySelectorAll.bind(document);
+
+    const tabs = $$(".tab-item");
+    const panes = $$(".tab-pane");
+
+    const tabActive = $(".tab-item.active");
+    const line = $(".tabs .line");
+
+    requestIdleCallback(function () {
+        line.style.left = tabActive.offsetLeft + "px";
+        line.style.width = tabActive.offsetWidth + "px";
+    });
+
+    tabs.forEach((tab, index) => {
+        const pane = panes[index];
+
+        tab.onclick = function () {
+            $(".tab-item.active").classList.remove("active");
+            $(".tab-pane.active").classList.remove("active");
+
+            line.style.left = this.offsetLeft + "px";
+            line.style.width = this.offsetWidth + "px";
+
+            this.classList.add("active");
+            pane.classList.add("active");
+        };
+    });
+</script>
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+        'use strict'
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+</html>

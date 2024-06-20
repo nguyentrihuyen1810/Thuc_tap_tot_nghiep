@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/bookstore.css}">
+</head>
+<body style="background: #ececec">
+<th:block th:include="header-footer/headerLoginAdmin"></th:block>
+
+<div style="padding: 20px; width: 100%; background-color: white">
+    <a style="margin: 10px 0px; color: #777777">DANH SÁCH SẢN PHẨM</a><br>
+    <a>Home / </a><a style="color:#43A316">Danh sách sản phẩm</a>
+</div>
+
+<!--<div th:text="${mess}"></div>-->
+
+<div style="width: 1200px; height: auto; background-color: white; margin-left: 150px; margin-top: 20px; border-radius:20px;">
+    <h3 style="text-align: center; padding-top: 20px">DANH SÁCH SẢN PHẨM</h3>
+    <button th:href="@{/admin/book/create}" style="float: left; background-color: #02377d; color: white; border: #02377d; margin-left: 60px; margin-bottom: 20px; margin-top: 10px" type="button" class="btn btn-outline-primary"><a th:href="@{/admin/book/create}" style="text-decoration: none; color: white">(+) Thêm mới</a></button>
+    <nav style="float: left; margin-left: 590px" class="navbar bg-body-tertiary">
+        <div class="container-fluid" style="background-color: white">
+            <form class="d-flex" role="search" th:action = "@{'/admin/book'}" method = "get" style="height: 40px">
+                <input class="form-control me-2" type="search" placeholder="Search" name = "bookNameSearch" aria-label="Tìm kiếm">
+                <button class="btn btn-success" type="submit" style="width: 125px">Tìm kiếm</button>
+            </form>
+        </div>
+    </nav>
+    <table class="table table-hover" style="width: 90%; margin-left: 60px">
+        <thead style="background-color: #02377d; color: white">
+        <tr>
+            <th style="width: auto" scope="col">STT</th>
+            <th scope="col">Mã sách</th>
+            <th scope="col">Tên sách</th>
+            <th scope="col">Giá tiền</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each = "book, status: ${books}">
+            <td th:text = "${status.index+1}" scope="row"></td>
+            <th th:text = "${book.bookCode}" style="width: 120px " scope="row"></th>
+            <td th:text = "${book.bookName}" style="width: 500px"></td>
+            <td th:text = "${book.bookPrice}" style="width: auto"></td>
+            <td>
+                <button type="submit" class="btn btn-success" style="margin-left:70px; border: none; background-color: #02377d; width: 70px;"><a th:href = "@{book/detail(bookId=${book.getBookId()})}"  style="text-decoration: none; color: white">Xem</a></button>
+                <button type="submit" class="btn btn-success" style="background: white; color: #012b62; width: 70px;"><a style="text-decoration: none; color: black" th:href = "@{book/edit(bookId=${book.getBookId()})}">Sửa</a></button>
+                <button type="button" style="border: none; background-color: red; width: 70px"
+                        th:onclick="'deleteBook(' + ${book.getBookId()} + ')'"
+                        class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+                    Xóa
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation example" style="float: left; margin-top: 30px; margin-left: 530px">
+        <a th:href = "@{'/admin/book'(page=${books.number - 1}, name = ${bookNameSearch})}" th:if="${books.hasPrevious()}">Trước</a>
+        <span th:text="${books.number + 1}"></span>/<span th:text="${books.totalPages}"></span>
+        <a th:href = "@{'/admin/book'(page=${books.number + 1}, name=${bookNameSearch})}" th:if="${books.hasNext()}">Sau</a>
+    </nav>
+</div>
+
+<!-- Modal -->
+<form th:action="@{/admin/book/delete}" method="get">
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Xác nhận xóa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" hidden name="idDelete" id="idDelete">
+                    Bạn có muốn xóa sách có ID là: <span id="idD" style="color: red"></span> không ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Trờ về</button>
+                    <button type="submit" class="btn btn-primary">Xóa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    function deleteBook(id) {
+        const myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+        const myInput = document.getElementById('idD');
+
+        myInput.innerText = id;  // Hiển thị id sách trong modal
+        document.getElementById("idDelete").value = id; // Gán id sách vào input hidden để submit
+
+        myModal.show();  // Hiển thị modal
+    }
+</script>
+
+<script th:inline="javascript">
+    /* Lấy giá trị của mess từ thẻ span */
+    var messValue = [[${mess}]];
+
+    /* Kiểm tra nếu messValue không rỗng thì hiển thị alert */
+    if (messValue) {
+        /* Tạo một alert hiển thị thông báo mess */
+        alert(messValue);
+    }
+</script>
+
+<th:block th:include="header-footer/footer"></th:block>
+</body>
+
+<script>
+    const $ = document.querySelector.bind(document);
+    const $$ = document.querySelectorAll.bind(document);
+
+    const tabs = $$(".tab-item");
+    const panes = $$(".tab-pane");
+
+    const tabActive = $(".tab-item.active");
+    const line = $(".tabs .line");
+
+    requestIdleCallback(function () {
+        line.style.left = tabActive.offsetLeft + "px";
+        line.style.width = tabActive.offsetWidth + "px";
+    });
+
+    tabs.forEach((tab, index) => {
+        const pane = panes[index];
+
+        tab.onclick = function () {
+            $(".tab-item.active").classList.remove("active");
+            $(".tab-pane.active").classList.remove("active");
+
+            line.style.left = this.offsetLeft + "px";
+            line.style.width = this.offsetWidth + "px";
+
+            this.classList.add("active");
+            pane.classList.add("active");
+        };
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+</html>

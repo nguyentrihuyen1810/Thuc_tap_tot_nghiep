@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" th:href="@{/bookstore.css}">
+</head>
+<body>
+<div class="header">
+  <div class="header1">
+    <ul style="margin-bottom: 0px;">
+      <li>
+        <div class = "headerTitle">
+          <img src="../image/logo.png">
+        </div>
+      </li>
+      <li style="width: 700px;">
+        <div class = "search" style="margin-top: 30px; margin-bottom: 0px;">
+          <form class="d-flex" role="search" th:action="@{'/bookstore'}">
+            <select class="form-select" style = "float:left; margin-left: 2px; width: 217px; border-radius: 6px 0px 0px 6px" name = "bookCategoryIdSearch">
+              <option value="">Chọn Danh mục</option>
+              <option th:each = "cateList:${categoryList}" th:value = "${cateList.categoryId}" th:text = "${cateList.categoryName}">1</option>
+            </select>
+            <input name = "bookNameSearch" style="height: 40px; width: 350px; margin-right: 0px; border-radius: 0px 6px 6px 0px;" placeholder="Tìm kiếm sách theo từ khóa" class="form-control me-2" type="search" aria-label="Search">
+            <button style="border:none; background-color: #43A316; height: 40px; margin-left: 0px" class="btn btn-outline-success" type="submit">
+              <img style="width: 30px" src="../image/search.png"></button>
+          </form>
+        </div>
+      </li>
+      <li>
+        <div class = "account" style="width: 50px; float:left; margin-top: 10px">
+          <img style= "width: 50px; margin-top: 15px" src="../image/account.png">
+        </div>
+        <div class="titleAccount" style="float: left; margin-top: 10px;">
+          <h6>
+            <a th:if="${#request.userPrincipal == null}" style="margin-left: 0px; font-size: 12px" th:href="@{/login}" id="login-link">Đăng nhập</a>
+            <a th:if="${#request.userPrincipal != null}" style="margin-left: 0px; font-size: 12px" th:href="@{/logout}">Đăng xuất</a>
+          </h6>
+          <h3>
+            <a th:if="${#request.userPrincipal == null}" style="margin-left: 0px; margin-top: 8px" th:href="@{/account}">Tài khoản của tôi</a>
+            <a th:if="${#request.userPrincipal != null}" th:utext="${#request.userPrincipal.name}" style="margin-left: 0px; margin-top: 8px" th:href="@{/account}"></a>
+          </h3>
+        </div>
+      </li>
+      <li style="margin-left: 0px">
+        <div class = "account" style="width: 50px; float:left; margin-top: 10px; margin-left: 20px">
+          <img style= "width: 50px; margin-top: 15px" src="../image/cart.png">
+        </div>
+        <div class="titleAccount" style="float: left; margin-top: 10px;">
+          <h6><a style="margin-left: 0px; font-size: 12px" th:href="@{/cart}">Giỏ hàng</a></h6>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="col-4 nav" style="width: 100%">
+    <ul style="width: 100%; background-color: #012b62; height: 50px">
+      <li><a th:href="@{/bookstore}">Trang chủ</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Khác</a></li>
+    </ul>
+  </div>
+</div>
+
+<div th:if = "${success}">
+  <p class = "alert alert-success" th:text = "${success}"></p>
+</div>
+<div th:if = "${error}">
+  <p class = "alert alert-danger" th:text = "${error}"></p>
+</div>
+
+<div class="home_content" style="background-color: white; width: 70%; height: auto; margin-top: 10px; margin-left: 220px; border-radius: 50px">
+  <h3 style="text-align: center; margin-top: 70px; padding-top: 20px"><b>ĐĂNG KÝ</b></h3>
+  <form th:action="@{/do-register}" method="post" th:object="${accountDTO}" class="row g-3" style="margin-left: 50px; margin-right: 50px">
+    <div class="col-md-6">
+      <label class="form-label">Họ tên</label>
+      <input th:field="*{fullName}" type="text" class="form-control" required>
+      <div style="height: 10px; padding-top: 5px" class="alert alert-danger" th:if = "${#fields.hasErrors('fullName')}" th:errors = "*{fullName}"></div>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Email</label>
+      <input th:field="*{email}" type="email" class="form-control" required>
+      <div style="height: 10px; padding-top: 5px" class="alert alert-danger" th:if = "${#fields.hasErrors('email')}" th:errors = "*{email}"></div>
+    </div>
+    <div class="col-md-6" style="width: 400px" >
+      <label class="form-label">Số điện thoại</label>
+      <input th:field="*{phoneNumber}" type="text" class="form-control" required>
+      <div style="height: 10px; padding-top: 5px" class="alert alert-danger" th:if = "${#fields.hasErrors('phoneNumber')}" th:errors = "*{phoneNumber}"></div>
+    </div>
+    <div class="col-12" style="width: 563px">
+      <label class="form-label">Địa chỉ</label>
+      <input th:field="*{address}" type="text" class="form-control" required>
+      <div style="height: 10px; padding-top: 5px" class="alert alert-danger" th:if = "${#fields.hasErrors('address')}" th:errors = "*{address}"></div>
+    </div>
+    <div class="col-md-4" style="width: 330px">
+      <label class="form-label">Tên tài khoản</label>
+      <input th:field="*{username}" type="text" class="form-control">
+      <div style="height: 10px; padding-top: 5px" class="alert alert-danger" th:if = "${#fields.hasErrors('username')}" th:errors = "*{username}"></div>
+    </div>
+    <div style="width: 280px" class="col-md-2">
+      <label class="form-label">Mật khẩu</label>
+      <input th:field="*{password}" type="password" class="form-control" required>
+      <div style="height: 10px; padding-top: 5px" class="alert alert-danger" th:if = "${#fields.hasErrors('password')}" th:errors = "*{password}"></div>
+    </div>
+    <div style="width: 280px" class="col-md-2">
+      <label class="form-label">Nhập lại mật khẩu</label>
+      <input th:field="*{repeatPassword}" type="password" class="form-control" required>
+    </div>
+    <div class="mb-3" style="width: 350px">
+      <label for="formFile" class="form-label">Ảnh đại diện</label>
+      <input th:field="*{image}" class="form-control" type="file" id="formFile" required>
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-success" style="border: none; background-color: #02377d; width: 170px; margin-left:290px; float: left; margin-bottom: 20px">Đăng ký</button>
+      <button type="submit" class="btn btn-success" style="background: white; color: #012b62; width: 170px; margin-left: 20px"><a style="text-decoration: none; color: black" th:href="@{/bookstore}">Trờ về</a></button>
+    </div>
+  </form>
+</div>
+
+<th:block th:include="header-footer/footer"></th:block>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+</html>

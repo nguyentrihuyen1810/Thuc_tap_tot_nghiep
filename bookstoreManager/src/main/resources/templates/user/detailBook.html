@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cập nhập thông tin</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" th:href="@{/bookstore.css}">
+</head>
+<body>
+<div class="header">
+  <div class="header1">
+    <ul style="margin-bottom: 0px;">
+      <li>
+        <div class = "headerTitle">
+          <img src="../image/logo.png">
+        </div>
+      </li>
+      <li style="width: 700px;">
+        <div class = "search" style="margin-top: 30px; margin-bottom: 0px;">
+          <form class="d-flex" role="search" th:action="@{'/bookstore'}">
+            <select class="form-select" style = "float:left; margin-left: 2px; width: 217px; border-radius: 6px 0px 0px 6px" name = "bookCategoryIdSearch">
+              <option value="">Chọn Danh mục</option>
+              <option th:each = "cateList:${categoryList}" th:value = "${cateList.categoryId}" th:text = "${cateList.categoryName}">1</option>
+            </select>
+            <input name = "bookNameSearch" style="height: 40px; width: 350px; margin-right: 0px; border-radius: 0px 6px 6px 0px;" placeholder="Tìm kiếm sách theo từ khóa" class="form-control me-2" type="search" aria-label="Search">
+            <button style="border:none; background-color: #43A316; height: 40px; margin-left: 0px" class="btn btn-outline-success" type="submit">
+              <img style="width: 30px" src="../image/search.png"></button>
+          </form>
+        </div>
+      </li>
+      <li>
+        <div class = "account" style="width: 50px; float:left; margin-top: 10px">
+          <img style= "width: 50px; margin-top: 15px" src="../image/account.png">
+        </div>
+        <div class="titleAccount" style="float: left; margin-top: 10px;">
+          <h6>
+            <a th:if="${#request.userPrincipal == null}" style="margin-left: 0px; font-size: 12px" th:href="@{/login}" id="login-link">Đăng nhập</a>
+            <a th:if="${#request.userPrincipal != null}" style="margin-left: 0px; font-size: 12px" th:href="@{/logout}">Đăng xuất</a>
+          </h6>
+          <h3>
+            <a th:if="${#request.userPrincipal == null}" style="margin-left: 0px; margin-top: 8px" th:href="@{/account}">Tài khoản của tôi</a>
+            <a th:if="${#request.userPrincipal != null}" th:utext="${#request.userPrincipal.name}" style="margin-left: 0px; margin-top: 8px" th:href="@{/account}"></a>
+          </h3>
+        </div>
+      </li>
+      <li style="margin-left: 0px">
+        <div class = "account" style="width: 50px; float:left; margin-top: 10px; margin-left: 20px">
+          <img style= "width: 50px; margin-top: 15px" src="../image/cart.png">
+        </div>
+        <div class="titleAccount" style="float: left; margin-top: 10px;">
+          <h6><a style="margin-left: 0px; font-size: 12px" th:href="@{/cart}">Giỏ hàng</a></h6>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="col-4 nav" style="width: 100%">
+    <ul style="width: 100%; background-color: #012b62; height: 50px">
+      <li><a th:href="@{/bookstore}">Trang chủ</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Khác</a></li>
+    </ul>
+  </div>
+</div>
+
+<div style="padding: 20px; width: 100%; background-color: white">
+  <a style="margin: 10px 0px; color: #777777">CHI TIẾT SẢN PHẨM</a><br>
+  <a>Home / </a><a>Danh sách sản phẩm / </a><a style="color:#43A316">Chi tiết sản phẩm</a>
+</div>
+
+<div th:action = "@{/admin/save}" method = "post" th:object="${bookDTO}" class="home_content" style="background-color: white; width: 90%; height: auto; margin-top: 20px; margin-left: 70px">
+  <table style = "width: 100%">
+    <tr>
+      <td style="width: 40%; padding: 60px 20px 40px 130px;" rowspan="15"><img th:src="@{/image/imageBook/__${bookDTO.bookImage}__}" alt="iphone11" width="400px" height="400px"></td>
+      <td style="height:0px"><input style="background: white; border: hidden; font-size: 35px; padding-top: 50px" disabled th:field ="*{bookName}" type="text" class="form-control form-control-lg"></td>
+    </tr>
+    <tr>
+      <td style="height:0px">
+        <div class="input-group has-validation">
+          <span style="font-size: 15px;text-decoration:underline;color: red;height: 20px;background-color: white;border: hidden;padding-top: 27px;padding-right: 0px;" class="input-group-text" id="inputGroupPrepend">đ</span>
+          <input style="background: white;border: hidden;font-size: 25px;padding-top: 0px;padding-left: 5px; color: red" disabled th:field ="*{bookPrice}" type="text" class="form-control form-control-lg">
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td style="height:0px">
+        <span style="float: left; color: #9d9d9d;height: 20px; background-color: white; border: hidden; padding-top: 27px; padding-right: 0px;" class="input-group-text">Deal Sốc</span>
+        <input style="background: white; border: hidden; padding: 0px 0px 0px 0px; width: 50px; float: left; margin-left: 30px" disabled th:field ="*{bookPromotionId.promotionPercent}" type="text" class="form-control form-control-lg">
+        <span style="float: left; color: #9d9d9d;height: 20px; background-color: white; border: hidden; padding-top: 25px; padding-right: 0px; padding-left: 0px;" class="input-group-text">%</span>
+      </td>
+    </tr>
+    <tr>
+      <form th:action="@{/add-to-cart}" method="post">
+        <td style="height:0px">
+          <input type="hidden" th:value="${bookDTO.bookId}" name="id">
+          <button class="btn btn-outline-success" style="float: left; margin-left: 10px; border:none; height: 40px; width: 200px; background-color: #02377d;" type="submit" name="muahang">
+            <img src="../image/iconAddToCart.png" width="30px" height="30px"><a style="color:white; margin-left: 5px">Thêm vào giỏ hàng</a>
+          </button><br>
+        </td>
+      </form>
+    </tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+  </table>
+
+  <div style="clear:both"></div>
+
+  <div style="padding: 20px; width: 96%; margin-bottom: 20px; margin-left: 20px">
+    <p style="font-weight: 600">CHI TIẾT SẢN PHẨM</p>
+    <table>
+      <tr>
+        <td style="color: #9d9d9d;">Tác giả</td>
+        <td style="padding-left: 50px"><input style="background: white; border: hidden" disabled th:field ="*{bookAuthorId.authorName}" type="text" class="form-control"></td>
+      </tr>
+      <tr>
+        <td style="color: #9d9d9d;">Danh mục</td>
+        <td style="padding-left: 50px"><input style="background: white; border: hidden" disabled th:field ="*{categoryId.categoryName}" type="text" class="form-control"></td>
+      </tr>
+      <tr>
+        <td style="color: #9d9d9d;">Kích thước</td>
+        <td style="padding-left: 50px"><input style="background: white; border: hidden" disabled th:field ="*{bookSize}" type="text" class="form-control"></td>
+      </tr>
+      <tr>
+        <td style="color: #9d9d9d;">Ngày xuất bản</td>
+        <td style="padding-left: 50px"><input style="background: white; border: hidden" disabled th:field ="*{bookPublishDate}" type="text" class="form-control"></td>
+      </tr>
+    </table>
+    <p style="font-weight: 600; padding-top: 50px">MÔ TẢ SẢN PHẨM</p>
+    <textarea style="background: white; border: hidden; height: 300px; width: 90%" disabled th:field ="*{bookContent}" type="text" class="form-control"/>
+  </div>
+</div>
+
+<script th:inline="javascript">
+  /* Lấy giá trị của mess từ thẻ span */
+  var messValue = [[${mess}]];
+
+  /* Kiểm tra nếu messValue không rỗng thì hiển thị alert */
+  if (messValue) {
+    /* Tạo một alert hiển thị thông báo mess */
+    alert(messValue);
+  }
+</script>
+
+<th:block th:include="header-footer/footer"></th:block>
+
+<script>
+  let btn = document.querySelector("#btn");
+  let sidebar = document.querySelector(".sidebar");
+
+  btn.onclick = function(){
+    sidebar.classList.toggle("active");
+  }
+</script>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" th:href="@{/bookstore.css}">
+</head>
+<body>
+<th:block th:include="header-footer/headerLoginAdmin"></th:block>
+
+<div style="padding: 20px; width: 100%; background-color: white">
+  <a style="margin: 10px 0px; color: #777777">THÊM SÁCH MỚI</a><br>
+  <a>Home / </a><a>Danh sách sản phẩm / </a><a style="color:#43A316">Thêm sách mới</a>
+</div>
+
+<div style="width: 1200px; height: auto; background-color: white; margin-left: 150px; margin-top: 20px; border-radius:20px;">
+  <h3 style="text-align: center; padding-top: 20px; color: #02377d">THÊM SÁCH MỚI</h3><br>
+  <form th:action="@{/admin/book/save}" method="post" th:object="${bookDTO}" class="row g-3 needs-validation" novalidate style="width: 1100px; margin-left: 50px">
+    <div class="col-md-4">
+      <label for="validationTooltip01" class="form-label">Mã sách</label>
+      <input th:field="*{bookCode}" type="text" class="form-control" id="validationTooltip01" required>
+      <div class="alert alert-danger" th:if="${#fields.hasErrors('bookCode')}" th:errors="*{bookCode}"></div>
+    </div>
+
+    <div class="col-md-4">
+      <label for="validationTooltip02" class="form-label">Tên sách</label>
+      <input th:field ="*{bookName}" type="text" class="form-control" id="validationTooltip02" required>
+      <div class="alert alert-danger" th:if="${#fields.hasErrors('bookName')}" th:errors="*{bookName}"></div>
+    </div>
+
+    <div class="col-md-3">
+      <label for="validationTooltip03" class="form-label">Tác giả</label>
+      <select th:field ="*{bookAuthorId}"  class="form-select" id="validationTooltip03" required>
+        <option th:each="scl:${authorList}" th:value="${scl.authorId}" th:text="${scl.authorName}"></option>
+      </select>
+      <div class="invalid-tooltip"></div>
+    </div>
+
+    <div class="col-md-6" style="width: auto;">
+      <label for="validationTooltip04" class="form-label">Kích thước</label>
+      <input th:field ="*{bookSize}" style="width: 300px" type="text" class="form-control" id="validationTooltip04" required>
+      <div class="alert alert-danger" th:if="${#fields.hasErrors('bookSize')}" th:errors="*{bookSize}"></div>
+    </div>
+
+    <div class="col-md-3">
+      <label for="validationTooltip05" class="form-label">Ngày xuất bản</label>
+      <input th:field ="*{bookPublishDate}" type="date" style="width: 250px;" class="form-control" id="validationTooltip05" required>
+      <div class="alert alert-danger" th:if="${#fields.hasErrors('bookPublishDate')}" th:errors="*{bookPublishDate}"></div>
+    </div>
+
+    <div class="col-md-3">
+      <label for="validationTooltip06" class="form-label">Hình ảnh</label>
+      <input th:field ="*{bookImage}" style="width: 400px" type="file" class="form-control" id="validationTooltip06" required>
+      <div class="alert alert-danger" th:if="${#fields.hasErrors('bookImage')}" th:errors="*{bookImage}"></div>
+    </div><br>
+
+    <div class="col-md-3">
+      <label for="validationTooltip07" class="form-label">Giá tiền</label>
+      <input th:field ="*{bookPrice}" style="width: 300px" type="number" class="form-control" id="validationTooltip07" required title="Phải nhập số dương và không bắt đầu bằng số 0">
+      <div class="alert alert-danger" th:if="${#fields.hasErrors('bookPrice')}" th:errors="*{bookPrice}"></div>
+    </div>
+
+    <div class="col-md-3">
+      <label style="margin-left: 50px;" for="validationTooltip08" class="form-label">Danh mục</label>
+      <select th:field ="*{categoryId}" style="width: 300px; margin-left: 50px" class="form-select" id="validationTooltip08" required>
+        <option selected disabled value="">Chọn...</option>
+        <option th:each="scl:${categoryList}" th:value="${scl.categoryId}" th:text="${scl.categoryName}"></option>
+      </select>
+      <div th:if="${#fields.hasErrors('bookAuthorId')}" th:errors="*{bookAuthorId}" class="invalid-tooltip"></div>
+    </div>
+
+    <div class="col-md-3" style="float: left; width: 250px">
+      <label style="margin-left: 100px;" for="validationTooltip09" class="form-label">Khuyến mãi</label>
+      <select th:field ="*{bookPromotionId}" style="width: 120px; margin-left: 100px" class="form-select" id="validationTooltip09" required>
+        <option selected disabled value="">Chọn...</option>
+        <option th:each="scl:${promotionList}" th:value="${scl.promotionId}" th:text="${scl.promotionPercent}"></option>
+      </select>
+      <div th:if="${#fields.hasErrors('bookPromotionId')}" th:errors="*{bookPromotionId}" class="invalid-tooltip"></div>
+    </div>
+
+    <div class="col-md-6" style="width: 200px">
+      <label for="validationTooltip04" class="form-label">Số lượng</label>
+      <input th:field ="*{bookQuantity}" style="width: 190px" type="number" class="form-control" id="validationTooltip011" required>
+      <div class="alert alert-danger" th:if="${#fields.hasErrors('bookQuantity')}" th:errors="*{bookQuantity}"></div>
+    </div>
+
+    <div class="col-md-3">
+      <label for="validationTooltip10" class="form-label">Mô tả</label>
+      <textarea th:field ="*{bookContent}" style="width: 990px" class="form-control" id="validationTooltip10" required></textarea>
+      <div class="alert alert-danger" th:if="${#fields.hasErrors('bookContent')}" th:errors="*{bookContent}"></div>
+    </div>
+
+    <div class="col-12" style="margin-bottom: 20px">
+      <button type="submit" class="btn btn-success" style="border: none; background-color: #02377d; width: 170px;margin-left: 380px; float: left; margin-top: 20px">Thêm mới</button>
+      <button type="submit" class="btn btn-success" style="background: white; color: #012b62; width: 170px; margin-left: 20px; margin-top: 20px"><a style="text-decoration: none; color: #012b62" th:href="@{/admin/book}">Trở về</a></button>
+    </div>
+  </form>
+</div>
+
+<script th:inline="javascript">
+  /* Lấy giá trị của mess từ thẻ span */
+  var messValue = [[${mess}]];
+
+  /* Kiểm tra nếu messValue không rỗng thì hiển thị alert */
+  if (messValue) {
+    /* Tạo một alert hiển thị thông báo mess */
+    alert(messValue);
+  }
+</script>
+
+<th:block th:include="header-footer/footer"></th:block>
+
+</body>
+<script>
+  const $ = document.querySelector.bind(document);
+  const $$ = document.querySelectorAll.bind(document);
+
+  const tabs = $$(".tab-item");
+  const panes = $$(".tab-pane");
+
+  const tabActive = $(".tab-item.active");
+  const line = $(".tabs .line");
+
+  requestIdleCallback(function () {
+    line.style.left = tabActive.offsetLeft + "px";
+    line.style.width = tabActive.offsetWidth + "px";
+  });
+
+  tabs.forEach((tab, index) => {
+    const pane = panes[index];
+
+    tab.onclick = function () {
+      $(".tab-item.active").classList.remove("active");
+      $(".tab-pane.active").classList.remove("active");
+
+      line.style.left = this.offsetLeft + "px";
+      line.style.width = this.offsetWidth + "px";
+
+      this.classList.add("active");
+      pane.classList.add("active");
+    };
+  });
+</script>
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (() => {
+    'use strict'
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+        form.classList.add('was-validated')
+      }, false)
+    })
+  })()
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+</html>

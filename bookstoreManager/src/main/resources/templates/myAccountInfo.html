@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Tai khoan cua toi</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/bookstore.css}">
+</head>
+<body>
+<div class="header">
+    <div class="header1">
+        <ul style="margin-bottom: 0px;">
+            <li>
+                <div class = "headerTitle">
+                    <img src="../image/logo.png">
+                </div>
+            </li>
+            <li style="width: 700px;">
+                <div class = "search" style="margin-top: 30px; margin-bottom: 0px;">
+                    <form class="d-flex" role="search">
+                        <input style="height: 40px; width: 500px; margin-right: 0px;" placeholder="Tìm kiếm sách theo từ khóa" class="form-control me-2" type="search" aria-label="Search">
+                        <button style="border:none; background-color: #43A316; height: 40px; margin-left: 0px" class="btn btn-outline-success" type="submit">
+                            <img style="width: 30px" src="../image/search.png"></button>
+                    </form>
+                </div>
+            </li>
+            <li>
+                <div class = "account" style="width: 50px; float:left; margin-top: 10px">
+                    <img style= "width: 50px; margin-top: 15px" src="../image/account.png">
+                </div>
+                <div class="titleAccount" style="float: left; margin-top: 10px;">
+                    <h6>
+                        <a th:if="${#request.userPrincipal == null}" style="margin-left: 0px; font-size: 12px" th:href="@{/login}" id="login-link">Đăng nhập</a>
+                        <a th:if="${#request.userPrincipal != null}" style="margin-left: 0px; font-size: 12px" th:href="@{/logout}">Đăng xuất</a>
+                    </h6>
+                    <h3>
+                        <a th:if="${#request.userPrincipal == null}" style="margin-left: 0px; margin-top: 8px" th:href="@{/account}">Tài khoản của tôi</a>
+                        <a th:if="${#request.userPrincipal != null}" th:utext="${#request.userPrincipal.name}" style="margin-left: 0px; margin-top: 8px" th:href="@{/account}"></a>
+                    </h3>
+                </div>
+            </li>
+            </li>
+            <li style="margin-left: 0px">
+                <div class = "account" style="width: 50px; float:left; margin-top: 10px; margin-left: 20px">
+                    <img style= "width: 50px; margin-top: 15px" src="../image/cart.png">
+                </div>
+                <div class="titleAccount" style="float: left; margin-top: 10px;">
+                    <h6><a style="margin-left: 0px; font-size: 12px" th:href="@{/cart}">Giỏ hàng</a></h6>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="col-4 nav" style="width: 100%">
+        <ul style="width: 100%; background-color: #012b62; height: 50px">
+            <li><a th:href="@{/bookstore}">Trang chủ</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Khác</a></li>
+        </ul>
+    </div>
+</div>
+
+<div style="padding: 20px; width: 100%; background-color: white">
+    <a style="margin: 10px 0px; color: #777777">Tài khoản của tôi</a><br>
+    <a>Trang chủ / </a><a style="color:#43A316">Tài khoản của tôi</a>
+</div>
+
+<div style="width: 200px; height: 500px; margin-top: 20px; margin-left: 200px; margin-bottom: 20px; float: left">
+    <table>
+        <td>
+            <img style= "width: 35px; margin-top: 15px; float: left" src="../image/iconMyAccount.png">
+            <div style="background-color: #ececec; float: left; font-size: 16px; margin-top: 8px; padding-left: 5px" class="tab-item"><a style="text-decoration: none; margin-left: 0px; color: #02377d" th:href="@{/account}">Tài Khoản Của Tôi</a></div><br>
+        </td>
+    </table>
+    <img style= "width: 35px; margin-top: 15px; float: left" src="../image/iconBill.png">
+    <div style="background-color: #ececec; float: left; font-size: 16px; margin-top: 8px; padding-left: 5px" class="tab-item"><a style="text-decoration: none; margin-left: 0px; color: #02377d" th:href="@{/order}">Đơn Mua</a></div>
+</div>
+
+<div style="background-color: white; width: 900px; height: auto; margin-top: 20px; margin-left: 30px; margin-bottom: 20px; float: left"><br>
+    <span style="margin-top: 20px; margin-left: 40px">Hồ Sơ Của Tôi</span><br>
+    <span style="margin-top: 20px; margin-left: 40px; font-size: 13px">Quản lý thông tin hồ sơ để bảo mật tài khoản</span>
+    <hr style="width: 90%; margin-left: 40px">
+    <form th:action="@{/update-info}" method="put" th:object="${account}">
+        <div style="width: 450px; height: auto; float: left; margin-left: 80px">
+            <div class="input-group mb-3">
+                <span style="padding-top: 7px">Tên đăng nhập</span>
+                <input pattern=".{3,50}" title="Tên đăng nhập phải chứa từ 3 - 50 kí tự" th:field="*{username}" style="border-radius: 6px; margin-left: 10px" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+            </div>
+            <div class="input-group mb-3">
+                <span style="margin-left: 60px; padding-top: 7px">Họ tên</span>
+                <input pattern=".{3,50}" title="Tên đăng nhập phải chứa từ 3 - 50 kí tự" th:field="*{fullName}" style="border-radius: 6px; margin-left: 10px" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></div>
+            </div>
+            <div class="input-group mb-3">
+                <span style="margin-left: 67px; padding-top: 7px">Email</span>
+                <input pattern="^[A-Za-z0-9+_.-]+@(.+)$" title="Email không hợp lệ" th:field="*{email}" style="border-radius: 6px; margin-left: 10px" type="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+            </div>
+            <div class="input-group mb-3">
+                <span style="margin-left: 15px; padding-top: 7px">Số điện thoại</span>
+                <input pattern="^\d{10,11}$" title="Số điện thoại phải là số và có 10 - 11 số" th:field="*{phoneNumber}" style="border-radius: 6px; margin-left: 10px" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></div>
+            </div>
+            <div class="input-group mb-3">
+                <span style="margin-left: 60px; padding-top: 7px">Địa chỉ</span>
+                <input th:field="*{address}" style="border-radius: 6px; margin-left: 10px" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div>
+            </div>
+        </div>
+        <div style="width: 250px; height: 300px; float: left; margin-left: 40px; border-style: none none none solid">
+            <img th:src="@{/image/avatar/__${image}__}" style="border-radius: 50%; width: 150px; height: 150px; margin-left: 50px; margin-top: 50px">
+        </div>
+        <button type="submit" class="btn btn-success" style="float: left; background-color: #02377d; width: 100px; margin-top: 25px; margin-bottom: 20px; margin-left: 350px">Lưu</button>
+        <button type="submit" class="btn btn-success" style="background: white; color: #012b62; width: 100px; margin-left: 20px; margin-top: 25px"><a style="text-decoration: none; color: black" th:href="@{/bookstore}">Trở về</a></button>
+    </form>
+</div>
+
+<script th:inline="javascript">
+    /* Lấy giá trị của mess từ thẻ span */
+    var messValue = [[${mess}]];
+
+    /* Kiểm tra nếu messValue không rỗng thì hiển thị alert */
+    if (messValue) {
+        /* Tạo một alert hiển thị thông báo mess */
+        alert(messValue);
+    }
+</script>
+
+<th:block th:include="header-footer/footer"></th:block>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+</html>
