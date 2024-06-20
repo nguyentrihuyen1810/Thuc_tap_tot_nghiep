@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cập nhập thông tin</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="bookstore.css">
+</head>
+<body>
+<div class="header">
+    <div class="header1">
+        <ul style="margin-bottom: 0px;">
+            <li>
+                <div class = "headerTitle">
+                    <img src="../image/logo.png">
+                </div>
+            </li>
+            <li style="width: 700px;">
+                <div class = "search" style="margin-top: 30px; margin-bottom: 0px;">
+                    <form class="d-flex" role="search">
+                        <input style="height: 40px; width: 500px; margin-right: 0px;" placeholder="Tìm kiếm sách theo từ khóa" class="form-control me-2" type="search" aria-label="Search">
+                        <button style="border:none; background-color: #43A316; height: 40px; margin-left: 0px" class="btn btn-outline-success" type="submit">
+                            <img style="width: 30px" src="../image/search.png"></button>
+                    </form>
+                </div>
+            </li>
+            <li>
+                <div class = "account" style="width: 50px; float:left; margin-top: 10px">
+                    <img style= "width: 50px; margin-top: 15px" src="../image/account.png">
+                </div>
+                <div class="titleAccount" style="float: left; margin-top: 10px;">
+                    <h6><a style="margin-left: 0px; font-size: 12px" href="login.html">Sign in</a></h6>
+                    <h3><a style="margin-left: 0px; margin-top: 8px" href="myAccount.html">My Account</a></h3>
+                </div>
+            </li>
+            <li style="margin-left: 0px">
+                <div class = "account" style="width: 50px; float:left; margin-top: 10px; margin-left: 20px">
+                    <img style= "width: 50px; margin-top: 15px" src="../image/cart.png">
+                </div>
+                <div class="titleAccount" style="float: left; margin-top: 10px;">
+                    <h6><a style="margin-left: 0px; font-size: 12px" href="cart.html">My Cart (1)</a></h6>
+                    <h3><a style="margin-left: 0px; margin-top: 8px" href="cart.html">84.530<span style="font-size: 15px; text-decoration:underline">đ</span></a></h3>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="col-4 nav" style="width: 100%">
+        <ul style="width: 100%; background-color: #012b62; height: 50px">
+            <li><a href="home.html">Home</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="categories.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">Quản lý</a>
+                <ul class="dropdown-menu" style="width: auto;">
+                    <li><a style="color: black; margin-left: 0px" class="dropdown-item" href="#">Sản phẩm</a></li>
+                    <li><a style="color: black; margin-left: 0px"  class="dropdown-item" href="#">Khách hàng</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div style="padding: 20px; width: 100%; background-color: white">
+    <a style="margin: 10px 0px; color: #777777">DANH SÁCH SẢN PHẨM</a><br>
+    <a>Home / </a><a>Danh sách sản phẩm / </a><a style="color:#43A316">Từ Vựng IELTS 8.0 - Từ Vựng Đắt Để Đạt Điểm Cao 4 Kỹ Năng</a>
+</div>
+
+<div class="home_content" style="background-color: white; width: 90%; height: auto; margin-top: 20px; margin-left: 70px">
+    <div style="width: 50%; float: left; padding: 65px 20px 40px 130px; ">
+        <img src="https://salt.tikicdn.com/cache/w1200/media/catalog/producttmp/74/27/ac/2850acdbc53e8a2b8514e69b10639503.jpg" alt="iphone11" width="400px" height="400px">
+    </div>
+    <div style="width:50%; float: left; padding: 65px 20px 0 20px; ">
+        <h4 style="margin-bottom: 20px;">Từ Vựng IELTS 8.0 - Từ Vựng Đắt Để Đạt Điểm Cao 4 Kỹ Năng</h4>
+        <h4 style="margin-bottom: 20px;">$100</h4>
+        <span style="color: #9d9d9d">Deal Sốc</span><span style="margin-left: 30px">Giảm 2%</span>
+        <p style="color: #9d9d9d; margin-top: 20px">50 sản phẩm có sẵn</p><br>
+        <input class="form-control" style="float: left; height:40px; width:70px; text-align: center;" name="number" type="number" min="1" max="50" value="1">
+        <button class="btn btn-outline-success" style="float: left; margin-left: 10px; border:none; height: 40px; width: 200px; background-color: #02377d;" name="muahang">
+            <img src="../image/iconAddToCart.png" width="30px" height="30px"><a style="color:white; margin-left: 5px">Add to cart</a>
+        </button><br>
+    </div>
+
+    <div style="clear:both"></div>
+
+    <div style="padding: 20px; width: 96%; margin-bottom: 20px; margin-left: 20px">
+        <p style="font-weight: 600">CHI TIẾT SẢN PHẨM</p>
+        <table>
+            <tr>
+                <td style="color: #9d9d9d;">Tác giả</td>
+                <td style="padding-left: 50px">Tác giả</td>
+            </tr>
+            <tr>
+                <td style="color: #9d9d9d;">Danh mục</td>
+                <td style="padding-left: 50px">Tác giả</td>
+            </tr>
+            <tr>
+                <td style="color: #9d9d9d;">Số trang</td>
+                <td style="padding-left: 50px">Tác giả</td>
+            </tr>
+            <tr>
+                <td style="color: #9d9d9d;">Kích thước</td>
+                <td style="padding-left: 50px">Tác giả</td>
+            </tr>
+            <tr>
+                <td style="color: #9d9d9d;">Ngày phát hành</td>
+                <td style="padding-left: 50px">Tác giả</td>
+            </tr>
+        </table>
+        <p style="font-weight: 600; padding-top: 50px">MÔ TẢ SẢN PHẨM</p>
+        <p>Chip: Apple A13 Bionic - Screen: 6.1 inch - RAM: 4GB - Storage capacity: 128GB</p>
+    </div>
+</div>
+
+<footer class="footer">
+    <section class="container-footer">
+        <div class="about">
+            <h4>MAY WE HELP YOU?</h4>
+            <ul>
+                <li><a href="#">Payment Options</a></li>
+                <li><a href="#">Product Care</a></li>
+                <li><a href="#">Sitemap</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">FAQs</a></li>
+            </ul>
+        </div>
+        <div class="about" style="margin-right: 200px">
+            <h4>THE STORE</h4>
+            <ul>
+                <li><a href="#">About Store</a></li>
+                <li><a href="#">Privacy & Cookie Policy</a></li>
+                <li><a href="#">Careers</a></li>
+            </ul>
+        </div>
+        <div class="info">
+            <h4>INFORMATION</h4>
+            <ul>
+                <li>
+                    <i class="fa fa-home icon-address"></i>
+                    <span>469 Ton Duc Thang Street, Da Nang City</span>
+                </li>
+                <li>
+                    <i class="fa fa-phone icon-phone"></i>
+                    <span>+84 8888 8888</span>
+                </li>
+                <li>
+                    <i class="fa fa-clock icon-time"></i>
+                    <span>Mon-Sat 8:00 am to 8:00 pm</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+</footer>
+
+<script>
+    let btn = document.querySelector("#btn");
+    let sidebar = document.querySelector(".sidebar");
+
+    btn.onclick = function(){
+        sidebar.classList.toggle("active");
+    }
+</script>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="bookstore.css">
+</head>
+<body>
+<div class="header">
+    <div class="header1">
+        <ul style="margin-bottom: 0px;">
+            <li>
+                <div class = "headerTitle">
+                    <img src="../image/logo.png">
+                </div>
+            </li>
+            <li style="width: 700px;">
+                <div class = "search" style="margin-top: 30px; margin-bottom: 0px;">
+                    <form class="d-flex" role="search">
+                        <input style="height: 40px; width: 500px; margin-right: 0px;" placeholder="Tìm kiếm sách theo từ khóa" class="form-control me-2" type="search" aria-label="Search">
+                        <button style="border:none; background-color: #43A316; height: 40px; margin-left: 0px" class="btn btn-outline-success" type="submit">
+                            <img style="width: 30px" src="../image/search.png"></button>
+                    </form>
+                </div>
+            </li>
+            <li>
+                <div class = "account" style="width: 50px; float:left; margin-top: 10px">
+                    <img style= "width: 50px; margin-top: 15px" src="../image/account.png">
+                </div>
+                <div class="titleAccount" style="float: left; margin-top: 10px;">
+                    <h6><a style="margin-left: 0px; font-size: 12px" href="login.html">Sign in</a></h6>
+                    <h3><a style="margin-left: 0px; margin-top: 8px" href="myAccount.html">My Account</a></h3>
+                </div>
+            </li>
+            <li style="margin-left: 0px">
+                <div class = "account" style="width: 50px; float:left; margin-top: 10px; margin-left: 20px">
+                    <img style= "width: 50px; margin-top: 15px" src="../image/cart.png">
+                </div>
+                <div class="titleAccount" style="float: left; margin-top: 10px;">
+                    <h6><a style="margin-left: 0px; font-size: 12px" href="cart.html">My Cart (1)</a></h6>
+                    <h3><a style="margin-left: 0px; margin-top: 8px" href="cart.html">84.530<span style="font-size: 15px; text-decoration:underline">đ</span></a></h3>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="col-4 nav" style="width: 100%">
+        <ul style="width: 100%; background-color: #012b62; height: 50px">
+            <li><a href="home.html">Home</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="categories.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">Quản lý</a>
+                <ul class="dropdown-menu" style="width: auto;">
+                    <li><a style="color: black; margin-left: 0px" class="dropdown-item" href="#">Sản phẩm</a></li>
+                    <li><a style="color: black; margin-left: 0px"  class="dropdown-item" href="#">Khách hàng</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div style="padding: 20px; width: 100%; background-color: white">
+    <a style="margin: 10px 0px; color: #777777">THÊM NHÂN VIÊN MỚI</a><br>
+    <a>Home / </a><a>Danh sách nhân viên / </a><a style="color:#43A316">Thêm nhân viên mới</a>
+</div>
+
+<div style="width: 1200px; height: auto; background-color: white; margin-left: 150px; margin-top: 20px; border-radius:20px;">
+    <h3 style="text-align: center; padding-top: 20px; color: #02377d">THÊM NHÂN VIÊN MỚI</h3><br>
+    <form class="row g-3 needs-validation" novalidate style="width: 1100px; margin-left: 50px">
+        <div class="col-md-4 position-relative">
+            <label for="validationTooltip02" class="form-label">Tên nhân viên</label>
+            <input style="width: 500px" type="text" class="form-control" id="validationTooltip02" value="Otto" required>
+            <div class="valid-tooltip">
+                Looks good!
+            </div>
+        </div>
+        <div class="col-md-6 position-relative" style="width: auto;">
+            <label style="margin-left: 150px" for="validationTooltip04" class="form-label">Email</label>
+            <input style="width: 500px; margin-left: 150px" type="text" class="form-control" id="validationTooltip04" required>
+            <div class="invalid-tooltip">
+                Please provide a valid city.
+            </div>
+        </div>
+        <div class="col-md-3 position-relative">
+            <label for="validationTooltip05" class="form-label">Ngày sinh</label>
+            <input type="date" style="width: 250px;" class="form-control" id="validationTooltip05" required>
+            <div class="invalid-tooltip">
+                Please provide a valid zip.
+            </div>
+        </div>
+        <div class="col-md-3 position-relative">
+            <label for="validationTooltip07" class="form-label">Số điện thoại</label>
+            <input style="width: 340px" type="text" class="form-control" id="validationTooltip07" required>
+            <div class="invalid-tooltip">
+                Please provide a valid zip.
+            </div>
+        </div>
+        <div class="col-md-3 position-relative">
+            <label style="margin-left: 85px" type="file" for="validationTooltip06" class="form-label">Hình ảnh</label>
+            <input style="width: 380px; margin-left: 85px" type="file" class="form-control" id="validationTooltip06" required>
+            <div class="invalid-tooltip">
+                Please provide a valid zip.
+            </div>
+        </div><br>
+        <div class="col-md-3 position-relative"></div>
+        <div class="col-12" style="margin-bottom: 20px">
+            <button type="submit" class="btn btn-success" style="border: none; background-color: #02377d; width: 170px;margin-left: 380px; float: left; margin-top: 20px">Thêm mới</button>
+            <button type="submit" class="btn btn-success" style="background: white; color: #012b62; width: 170px; margin-left: 20px; margin-top: 20px"><a style="text-decoration: none; color: #012b62" href="listBook.html">Trở về</a></button>
+        </div>
+    </form>
+</div>
+
+<footer style="margin-top: 20px" class="footer">
+    <section class="container-footer">
+        <div class="about">
+            <h4>MAY WE HELP YOU?</h4>
+            <ul>
+                <li><a href="#">Payment Options</a></li>
+                <li><a href="#">Product Care</a></li>
+                <li><a href="#">Sitemap</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">FAQs</a></li>
+            </ul>
+        </div>
+        <div class="about" style="margin-right: 200px">
+            <h4>THE STORE</h4>
+            <ul>
+                <li><a href="#">About Store</a></li>
+                <li><a href="#">Privacy & Cookie Policy</a></li>
+                <li><a href="#">Careers</a></li>
+            </ul>
+        </div>
+        <div class="info">
+            <h4>INFORMATION</h4>
+            <ul>
+                <li>
+                    <i class="fa fa-home icon-address"></i>
+                    <span>469 Ton Duc Thang Street, Da Nang City</span>
+                </li>
+                <li>
+                    <i class="fa fa-phone icon-phone"></i>
+                    <span>+84 8888 8888</span>
+                </li>
+                <li>
+                    <i class="fa fa-clock icon-time"></i>
+                    <span>Mon-Sat 8:00 am to 8:00 pm</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+</footer>
+
+</body>
+<script>
+    const $ = document.querySelector.bind(document);
+    const $$ = document.querySelectorAll.bind(document);
+
+    const tabs = $$(".tab-item");
+    const panes = $$(".tab-pane");
+
+    const tabActive = $(".tab-item.active");
+    const line = $(".tabs .line");
+
+    requestIdleCallback(function () {
+        line.style.left = tabActive.offsetLeft + "px";
+        line.style.width = tabActive.offsetWidth + "px";
+    });
+
+    tabs.forEach((tab, index) => {
+        const pane = panes[index];
+
+        tab.onclick = function () {
+            $(".tab-item.active").classList.remove("active");
+            $(".tab-pane.active").classList.remove("active");
+
+            line.style.left = this.offsetLeft + "px";
+            line.style.width = this.offsetWidth + "px";
+
+            this.classList.add("active");
+            pane.classList.add("active");
+        };
+    });
+</script>
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+        'use strict'
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+</html>
